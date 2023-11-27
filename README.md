@@ -2,7 +2,7 @@
 
 # BaseREVSwerve </br>
 
-**Basic Swerve Code for a Swerve Module using REV Motors and a CTRE Pigeon Gyro** </br>
+**Basic Swerve Code for a Swerve Module using REV Motors, a CANCoder Sensor and a CTRE Pigeon Gyro** </br>
 This code was designed with Swerve Drive Specialties MK3, MK4, and MK4i style modules in mind, but should be easily adaptable to other styles of modules.</br>
 
 **Setting Constants**
