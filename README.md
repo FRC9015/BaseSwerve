@@ -1,8 +1,8 @@
-**Note: In 2023, there was an [issue](https://github.com/Team364/BaseFalconSwerve/issues/8) that prevented this code from working with MK4i's (or any module that used inverted motors). A [fix](https://github.com/Team364/BaseFalconSwerve/issues/8#issuecomment-1384799539) has been found, tested on a real robot, and this issue is believed to have been fixed as of 1/17. If anyone experiences any further issues, please report them. Thanks**
+**Note: In 2023, there was an [issue](https://github.com/Team364/BaseREVSwerve/issues/8) that prevented this code from working with MK4i's (or any module that used inverted motors). A [fix](https://github.com/Team364/BaseREVSwerve/issues/8#issuecomment-1384799539) has been found, tested on a real robot, and this issue is believed to have been fixed as of 1/17. If anyone experiences any further issues, please report them. Thanks**
 
-# BaseFalconSwerve </br>
+# BaseREVSwerve </br>
 
-**Basic Swerve Code for a Swerve Module using Falcon Motors, a CTRE CANCoder, and a CTRE Pigeon Gyro** </br>
+**Basic Swerve Code for a Swerve Module using REV Motors, a CTRE CANCoder, and a CTRE Pigeon Gyro** </br>
 This code was designed with Swerve Drive Specialties MK3, MK4, and MK4i style modules in mind, but should be easily adaptable to other styles of modules.</br>
 
 **Setting Constants**
@@ -21,7 +21,7 @@ These instructions are mostly followable from Step
     * CANCoder Sensor Invert
     * Angle Motor Gear Ratio
     * Drive Motor Gear Ratio
-    * Angle Falcon Motor PID Values
+    * Angle REV Motor PID Values
     
 3. ```trackWidth```: Center to Center distance of left and right modules in meters.
 4. ```wheelBase```: Center to Center distance of front and rear module wheels in meters.
