@@ -14,15 +14,15 @@ import frc.lib.util.SwerveModuleConstants;
 
 
 public class SwerveModule {
-    public int moduleNumber;
+    public final int moduleNumber;
     private Rotation2d angleOffset;
-    private Rotation2d lastAngle;
+    private Rotation2d latestAngle;
 
     private CANSparkMax mAngleMotor;
     private CANSparkMax mDriveMotor;
     private RelativeEncoder angleEncoder;
 
-    SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
+    private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
     public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants){
         this.moduleNumber = moduleNumber;
@@ -40,7 +40,7 @@ public class SwerveModule {
         mDriveMotor = new CANSparkMax(moduleConstants.driveMotorID, CANSparkMaxLowLevel.MotorType.kBrushless);
         configDriveMotor();
 
-        lastAngle = getState().angle;
+        latestAngle = getState().angle;
     }
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop){
@@ -62,10 +62,10 @@ public class SwerveModule {
     }
 
     private void setAngle(SwerveModuleState desiredState){
-        Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
+        Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? latestAngle : desiredState.angle; //Prevent rotating module if speed is less than 1%. Prevents Jittering.
         
         mAngleMotor.getPIDController().setReference(Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio), CANSparkMax.ControlType.kPosition);
-        lastAngle = angle;
+        latestAngle = angle;
     }
 
     private Rotation2d getAngle(){

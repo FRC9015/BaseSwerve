@@ -17,9 +17,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Swerve extends SubsystemBase {
-    public SwerveDriveOdometry swerveOdometry;
-    public SwerveModule[] mSwerveMods;
-    public Pigeon2 gyro;
+    private SwerveDriveOdometry swerveOdometry;
+    private SwerveModule[] mSwerveMods;
+    private Pigeon2 gyro;
 
 
     public Swerve() {
