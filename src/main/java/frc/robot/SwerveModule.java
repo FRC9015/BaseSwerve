@@ -1,8 +1,10 @@
 package frc.robot;
 
+import com.ctre.phoenix.sensors.CANCoder;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.RelativeEncoder;
+
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -20,7 +22,7 @@ public class SwerveModule {
 
     private CANSparkMax mAngleMotor;
     private CANSparkMax mDriveMotor;
-    private RelativeEncoder angleEncoder;
+    private CANCoder angleEncoder;
 
     private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
@@ -28,13 +30,13 @@ public class SwerveModule {
         this.moduleNumber = moduleNumber;
         this.angleOffset = moduleConstants.angleOffset;
         
+        /* Angle Encoder Config */
+        angleEncoder = new CANCoder(moduleConstants.cancoderID);
+        configAngleEncoder();
+        
         /* Angle Motor Config */
         mAngleMotor = new CANSparkMax(moduleConstants.angleMotorID, CANSparkMaxLowLevel.MotorType.kBrushless);
         configAngleMotor();
-
-        /* Angle Encoder Config */
-        angleEncoder = mAngleMotor.getEncoder();
-        configAngleEncoder();
 
         /* Drive Motor Config */
         mDriveMotor = new CANSparkMax(moduleConstants.driveMotorID, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -82,8 +84,8 @@ public class SwerveModule {
     }
 
     private void configAngleEncoder(){        
-        angleEncoder.setPositionConversionFactor(1.0);  // Adjust if needed
-        angleEncoder.setVelocityConversionFactor(1.0);  // Adjust if needed
+        angleEncoder.configFactoryDefault();  // Adjust if needed
+        angleEncoder.configAllSettings(Robot.ctreConfigs.swerveCanCoderConfig);  // Adjust if needed
     }
 
     private void configAngleMotor(){
