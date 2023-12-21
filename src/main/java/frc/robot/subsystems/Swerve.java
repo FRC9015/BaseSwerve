@@ -7,6 +7,8 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
+
+import com.ctre.phoenix.sensors.CANCoderSimCollection;
 import com.ctre.phoenix.sensors.Pigeon2;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -20,6 +22,11 @@ public class Swerve extends SubsystemBase {
     private SwerveDriveOdometry swerveOdometry;
     private SwerveModule[] mSwerveMods;
     private Pigeon2 gyro;
+    private CANCoderSimCollection m_SwerveMod0;
+    private CANCoderSimCollection m_SwerveMod1;
+    private CANCoderSimCollection m_SwerveMod2;
+    private CANCoderSimCollection m_SwerveMod3;
+
 
 
     public Swerve() {
@@ -34,6 +41,13 @@ public class Swerve extends SubsystemBase {
             new SwerveModule(2, Constants.Swerve.Mod2.constants),
             new SwerveModule(3, Constants.Swerve.Mod3.constants),
         };
+        
+        // Get Angle Encoder Values for each Module for Simulation
+        m_SwerveMod0 = mSwerveMods[0].angleEncoder.getSimCollection();
+        m_SwerveMod1 = mSwerveMods[1].angleEncoder.getSimCollection();
+        m_SwerveMod2 = mSwerveMods[2].angleEncoder.getSimCollection();
+        m_SwerveMod3 = mSwerveMods[3].angleEncoder.getSimCollection();
+  
 
         Timer.delay(1.0);
         resetModulesToAbsolute();
@@ -118,5 +132,14 @@ public class Swerve extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
+    }
+    @Override
+    public void simulationPeriodic(){
+        System.out.println(m_SwerveMod0);
+        System.out.println(m_SwerveMod1);
+        System.out.println(m_SwerveMod2);
+        System.out.println(m_SwerveMod3);
+
+
     }
 }

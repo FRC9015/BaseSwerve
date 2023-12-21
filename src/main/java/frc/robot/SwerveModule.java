@@ -1,10 +1,8 @@
 package frc.robot;
 
 import com.ctre.phoenix.sensors.CANCoder;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -22,7 +20,7 @@ public class SwerveModule {
 
     private CANSparkMax mAngleMotor;
     private CANSparkMax mDriveMotor;
-    private CANCoder angleEncoder;
+    public CANCoder angleEncoder;
 
     private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
